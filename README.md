@@ -32,6 +32,19 @@ Los ficheros principales son:
    - Si el parámetro no existe, el simulador no devuelve respuesta.
    - Si el parámetro existe, se recibe su valor actualizado. Si coincide con el valor enviado, la modificación se ha aplicado correctamente.
 
+## Cambios realizados en companion-computer
+
+- `interface/app.py`: se añadió `db.session.add(UdpDestination(ip="127.0.0.1", port=14570))` en `initialize_udp_destinations` para recibir telemetría del dron.
+- `lite/Dockerfile`: se añadió la sección `EW reactor` para copiar los nuevos ficheros al contenedor.
+
+## Rebuild
+
+Cada vez que se modifique o añada un fichero del contenedor, se debe volver a construir la imagen:
+
+```bash
+docker compose -f docker-compose-lite.yaml build
+```
+
 ## Parámetros del simulador
 
 ### GPS
@@ -149,16 +162,3 @@ x $\in {O,2,3,}$
     - Valores: `0–1` (porcentaje)
 - **SIM_TIME_JITTER:** Límite superior de fluctuación aleatoria en el tiempo del bucle
     - Valores: `0+` (microsegundos)
-
-## Cambios realizados en companion-computer
-
-- `interface/app.py`: se añadió `db.session.add(UdpDestination(ip="127.0.0.1", port=14570))` en `initialize_udp_destinations` para recibir telemetría del dron.
-- `lite/Dockerfile`: se añadió la sección `EW reactor` para copiar los nuevos ficheros al contenedor.
-
-## Rebuild
-
-Cada vez que se modifique o añada un fichero del contenedor, se debe volver a construir la imagen:
-
-```bash
-docker compose -f docker-compose-lite.yaml build
-```
