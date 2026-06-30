@@ -24,7 +24,7 @@ DEFAULT_LOG_PATH = Path("telemetry.txt")
 UPDATE_INTERVAL = 2.0  # seconds
 mavlink_lock = threading.RLock()
 
-
+# Formato de telemetría en JSON
 def _format_snapshot(message_type: str, gauges: dict) -> str:
 	payload = {
 		"timestamp": time.time(),
@@ -38,7 +38,7 @@ def _write_line(handle, text: str) -> None:
 	handle.write(text + "\n")
 	handle.flush()
 
-
+# Terminal intercativa
 def _read_interactive_line(prompt: str) -> str:
 	if not sys.stdin.isatty() or not sys.stdout.isatty():
 		return input(prompt)
@@ -93,7 +93,7 @@ def _read_interactive_line(prompt: str) -> str:
 	finally:
 		termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
-
+# Registra la telemetría cada 'UPDATE_INTERVAL' segundos en un fichero
 def stream_telemetry(log_path: Path = DEFAULT_LOG_PATH) -> int:
 	print("Conectando a MAVLink en udp:0.0.0.0:14570")
 	conn = create_mavlink_connection()
@@ -142,7 +142,7 @@ def stream_telemetry(log_path: Path = DEFAULT_LOG_PATH) -> int:
 				last_write = now
 				snapshot = None
 
-
+# Envía un cambio de parámetro por MAVLink y muestra la respuesta
 def send_parameter_change(param_id: str, param_value: float) -> int:
 	with mavlink_lock:
 		print(f"Enviando modificación de parámetro: {param_id} = {param_value}")
@@ -155,7 +155,7 @@ def send_parameter_change(param_id: str, param_value: float) -> int:
 	print(f"Respuesta recibida: {param_id} = {result}")
 	return 0
 
-
+# Bucle interactivo para cambiar parámetros
 def interactive_parameter_loop(stop_event: threading.Event) -> int:
 	print("Comandos disponibles: set <PARAM_ID> <VALOR>, quit, exit")
 	while not stop_event.is_set():
@@ -196,7 +196,7 @@ def interactive_parameter_loop(stop_event: threading.Event) -> int:
 
 		print("Comando no reconocido. Usa: set <PARAM_ID> <VALOR>, quit, exit")
 
-
+# Ejecuta el procesamiento de telemetría y la termininal interactiva
 def run_reactor(log_path: Path = DEFAULT_LOG_PATH) -> int:
 	stop_event = threading.Event()
 	create_mavlink_connection()

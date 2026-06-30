@@ -2,6 +2,10 @@
 
 Interfaz para visualizar telemetría MAVLink y enviar cambios de parámetros al simulador desde el contenedor companion computer.
 
+Los ficheros principales son:
+- `ew-interface/mavlink-connection.py`
+- `ew-interface/ew-reactor.py`
+
 ## Ejecución
 
 1. Abrir una terminal dentro del contenedor:
@@ -149,7 +153,7 @@ x $\in {O,2,3,}$
 ## Cambios realizados en companion-computer
 
 - `interface/app.py`: se añadió `db.session.add(UdpDestination(ip="127.0.0.1", port=14570))` en `initialize_udp_destinations` para recibir telemetría del dron.
-- `lite/Dockerfile`: se añadió la sección ``EW reactor`` para copiar los nuevos ficheros al contenedor.
+- `lite/Dockerfile`: se añadió la sección `EW reactor` para copiar los nuevos ficheros al contenedor.
 
 ## Rebuild
 
