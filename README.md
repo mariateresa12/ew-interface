@@ -52,7 +52,7 @@ docker compose -f docker-compose-lite.yaml build
 x $\in {\  ,2}$
 
 - **SIM_GPSx_BYTELOSS:** Pérdida de datos GPS (simula paquetes perdidos)
-    - Valores: `0–1` (proporción de pérdida)
+    - Valores: `0–100` (proporción de pérdida)
 - **SIM_GPSx_DISABLE:** Desactiva el GPS
     - Valores: `0 = activo`, `1 = apagado`
 - **SIM_GPSx_GLITCH_X / Y / Z:** Error artificial en posición (inyección de fallo)
@@ -159,6 +159,6 @@ x $\in {O,2,3,}$
 ### Otros
 
 - **SIM_UART_LOSS:** Pérdida de datos en comunicaciones seriales
-    - Valores: `0–1` (porcentaje)
+    - Valores: `0–100` (porcentaje)
 - **SIM_TIME_JITTER:** Límite superior de fluctuación aleatoria en el tiempo del bucle
     - Valores: `0+` (microsegundos)
