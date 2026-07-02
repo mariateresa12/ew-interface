@@ -51,7 +51,7 @@ docker compose -f docker-compose-lite.yaml build
 
 x $\in {\  ,2}$
 
-- **SIM_GPSx_BYTELOS:** Pérdida de datos GPS (simula paquetes perdidos)
+- **SIM_GPSx_BYTELOSS:** Pérdida de datos GPS (simula paquetes perdidos)
     - Valores: `0–1` (proporción de pérdida)
 - **SIM_GPSx_DISABLE:** Desactiva el GPS
     - Valores: `0 = activo`, `1 = apagado`
