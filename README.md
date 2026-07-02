@@ -45,6 +45,12 @@ Cada vez que se modifique o añada un fichero del contenedor, se debe volver a c
 docker compose -f docker-compose-lite.yaml build
 ```
 
+Para construir un contenedor en especifico se debe colocar
+
+```bash
+docker compose -f docker-compose-lite.yaml build <nombre_del_contenedor>
+```
+
 ## Parámetros del simulador
 
 ### GPS
